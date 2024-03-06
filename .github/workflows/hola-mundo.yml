@@ -1,0 +1,16 @@
+name: HolaMundoConGolang
+on: [push]
+jobs:
+  saluda-al-mundo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Go 1.22.1
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.22.1
+      - name: Show go go-version
+        run: go version
+      - name: Display the directory
+        run: pwd
+      - name: Should return hello-world
+        run: go run .
