@@ -1,0 +1,8 @@
+name: HolaMundoConBash
+on: [push, pull_request, issues]
+jobs:
+  saluda-al-mundo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Shows hello world
+        run: echo "hola mundo"
