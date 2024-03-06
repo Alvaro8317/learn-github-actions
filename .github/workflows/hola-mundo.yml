@@ -1,17 +1,23 @@
-name: HolaMundoConGolang
+name: Python application
+
 on: [push]
+
+permissions:
+  contents: read
+
 jobs:
-  saluda-al-mundo:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup Go 1.22.1
-        uses: actions/setup-go@v4
+      - name: Make checkout and clone repository
+        uses: actions/checkout@v3
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
         with:
-          go-version: 1.22.1
-      - name: Show go go-version
-        run: go version
-      - name: Display the directory
-        run: pwd
-      - name: Should return hello-world
-        run: go run .
+          python-version: "3.10"
+      - name: Shows the variable
+        run: echo "USERNAME=${{ github.actor }} >> $GITHUB_ENV"
+      - name: Execute main python
+        run: python main.py
+
