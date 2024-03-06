@@ -4,7 +4,7 @@ jobs:
   saluda-al-mundo:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@aprendiendo-github-actions
+      - uses: actions/checkout@v4
       - name: Setup Go 1.22.1
         uses: actions/setup-go@v4
         with:
