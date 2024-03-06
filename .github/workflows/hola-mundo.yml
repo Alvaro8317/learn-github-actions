@@ -11,6 +11,6 @@ jobs:
       - name: Show go go-version
         run: go version
       - name: Display the directory
-        run: pwd
+        run: ls
       - name: Should return hello-world
         run: go run .
