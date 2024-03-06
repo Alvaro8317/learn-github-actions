@@ -1,2 +1,3 @@
 import os
-print(f"Hola {os.getenv("USERNAME")}")
+name = os.getenv("USERNAME")
+print(f"Hola {name}")
