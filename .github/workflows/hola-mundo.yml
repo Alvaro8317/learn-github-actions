@@ -4,6 +4,7 @@ jobs:
   saluda-al-mundo:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@aprendiendo-github-actions
       - name: Setup Go 1.22.1
         uses: actions/setup-go@v4
         with:
@@ -11,6 +12,6 @@ jobs:
       - name: Show go go-version
         run: go version
       - name: Display the directory
-        run: ls
+        run: pwd
       - name: Should return hello-world
         run: go run .
