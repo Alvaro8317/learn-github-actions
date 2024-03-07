@@ -1,0 +1,21 @@
+name: First step
+run-name: Aprendiendo con github actions
+on: [push]
+
+permissions:
+  contents: read
+# Todos los pasos se corren en el mismo runner
+jobs:
+  build-and-execute: # Nombre que identifica el job y agrupar los steps
+    runs-on: ubuntu-latest # Tipo de runner, puede ser windows, ubuntu o macOs. Incluso pueden ser propios
+    steps:
+      - name: Make checkout and clone repository #Opcional, identifica el step
+        uses: actions/checkout@v3 #NombreAutor/NombreAction@Version
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Shows the variable
+        run: echo "USERNAME=${{ github.actor }} >> $GITHUB_ENV" #Run es para que comando ejecutar
+      - name: Execute main python
+        run: python main.py

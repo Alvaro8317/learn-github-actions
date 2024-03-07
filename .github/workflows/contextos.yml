@@ -1,0 +1,14 @@
+name: ContextosEnGitHubActions
+run-name: RunName - Contextos en github actions
+on:
+  workflow_dispatch:
+jobs:
+  saluda-al-mundo-con-expresiones:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Primer paso - Valida la rama main
+        if: ${{ github.ref == 'refs/heads/main'}}
+        run: echo "Desplegando el código de la rama main del repositorio ${{ github.repository}}"
+      - name: Segundo paso - Valida el trigger
+        if: ${{ github.event_name == 'workflow_dispatch'}}
+        run: echo "Estoy siendo lanzado por un workflow dispatch!!!"
