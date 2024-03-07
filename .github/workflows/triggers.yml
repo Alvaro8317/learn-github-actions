@@ -1,15 +1,55 @@
-name: HolaMundoConBash
-on: 
+name: HolaMundoConBashYTriggers
+run-name: Soy lo que aparezco en la pestaña de actions para que me encuentres rápido
+on:
   push:
     branches:
       - aprendiendo-github-actions
       - main
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    paths:
+      - '**.py' # Apenas se abre un nuevo PR que tenga un .py se ejecuta, si se corre un .js no se debería de correr
   workflow_dispatch:
+    inputs:
+      lenguaje_favorito:
+        description: 'Lenguaje favorito'
+        default: Python
+        required: true
+        type: choice
+        options:
+          - Python
+          - Java
+          - Golang
+      nombre:
+        description: Mi nombre
+        required: true
+        default: Alvaro
+        type: string
+  issues:
+    types:
+      - 'labeled'
   schedule:
-    - cron: "30 2 * * *"
+    - cron: '30 2 * * *' #Esto es en horario UTC
 jobs:
   saluda-al-mundo:
     runs-on: ubuntu-latest
     steps:
       - name: Shows hello world
         run: echo "hola mundo"
+      - name: Define name
+        run: echo "USERNAME=${{ inputs.nombre }} >> $GITHUB_ENV"
+      - name: Define language
+        run: echo "LANGUAGE=${{ inputs.lenguaje_favorito }} >> $GITHUB_ENV"
+      - name: Ejecuta Python
+        run: python main.py
+  hola-mundo-con-expresiones:
+    if: ${{github.event_name != 'workflow_dispatch'}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Show hello world
+        run: echo "Hola, no fui ejecutado por un workflow_dispatch"

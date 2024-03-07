@@ -1,0 +1,56 @@
+name: ExpresionesEnGitHubActions
+run-name: RunName - Expresiones en github actions
+on:
+  push:
+    branches:
+      - aprendiendo-github-actions
+  pull_request:
+    types:
+      - opened
+      - reopened
+    paths:
+      - '**.py' # Apenas se abre un nuevo PR que tenga un .py se ejecuta, si se corre un .js no se debería de correr
+  workflow_dispatch:
+    inputs:
+      lenguaje_favorito:
+        description: 'Lenguaje favorito'
+        default: Python
+        required: true
+        type: string
+      nombre:
+        description: Mi nombre
+        required: true
+        default: Alvaro
+        type: string
+  issues:
+    types:
+      - 'labeled'
+  schedule:
+    - cron: '30 2 * * *' #Esto es en horario UTC
+jobs:
+  saluda-al-mundo-con-expresiones:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Primer paso - Saludar al mundo
+        run: echo "hola mundo"
+      - name: Segundo paso - Definir el nombre
+        run: echo "USERNAME=${{ inputs.nombre }} >> $GITHUB_ENV"
+      - name: Tercer paso - Opcional, valida si es Alvaro
+        if: ${{inputs.nombre == 'Alvaro'}}
+        run: echo "Hola Alvaro"
+      - name: Cuarto paso - Define el lenguaje
+        run: echo "LANGUAGE=${{ inputs.lenguaje_favorito }} >> $GITHUB_ENV"
+      - name: Quinto paso - Opcional, indica si tiene buen gusto o no
+        if: ${{contains(inputs.lenguaje_favorito, 'thon')}}
+        run: echo "Tienes buen gusto"
+      - name: Sexto paso - Opcional, valida otro buen gusto
+        if: ${{startsWith(inputs.lenguaje_favorito, 'Java')}}
+        run: echo "Tienes también buen gusto"
+  hola-mundo-con-expresiones-y-worlflow-dispatch:
+    if: ${{github.event_name != 'workflow_dispatch'}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Show hello world
+        run: echo "Hola, no fui ejecutado por un workflow_dispatch"
