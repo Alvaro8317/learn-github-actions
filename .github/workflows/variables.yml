@@ -10,6 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Primer paso - Muestra todas las variables de entorno
-        run: echo "Te mostraré todas las variables de entorno que encontré:\nWORKFLOW - $VARIABLE_ENTORNO_WORKFLOW\nJOB - $VARIABLE_ENTORNO_JOB\nSTEP - $VARIABLE_ENTORNO_STEP\nREPOSITORIO - $VARIABLE_ENTORNO_REPOSITORY"
+        run: echo "Te mostraré todas las variables de entorno que encontré:\nWORKFLOW - ${{env.VARIABLE_ENTORNO_WORKFLOW}}\nJOB - $VARIABLE_ENTORNO_JOB\nSTEP - $VARIABLE_ENTORNO_STEP\nREPOSITORIO - ${{ vars.VARIABLE_ENTORNO_REPOSITORY }}"
         env:
           VARIABLE_ENTORNO_STEP: 'Hola! Soy un env de step'
