@@ -43,6 +43,8 @@ jobs:
         run: echo "USERNAME=${{ inputs.nombre }} >> $GITHUB_ENV"
       - name: Define language
         run: echo "LANGUAGE=${{ inputs.lenguaje_favorito }} >> $GITHUB_ENV"
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Ejecuta Python
         run: python main.py
   hola-mundo-con-expresiones:
