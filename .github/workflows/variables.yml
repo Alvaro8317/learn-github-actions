@@ -1,0 +1,15 @@
+name: VariablesEnGitHubActions
+run-name: RunName - Variables en github actions
+on: [push]
+env:
+  VARIABLE_ENTORNO_WORKFLOW: 'Hola! Soy un env de workflow'
+jobs:
+  saluda-al-mundo-con-expresiones:
+    env:
+      VARIABLE_ENTORNO_JOB: 'Hola! Soy un env de JOB'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Primer paso - Muestra todas las variables de entorno
+        run: echo "Te mostraré todas las variables de entorno que encontré:\nWORKFLOW - $VARIABLE_ENTORNO_WORKFLOW\nJOB - $VARIABLE_ENTORNO_JOB\nSTEP - $VARIABLE_ENTORNO_STEP\nREPOSITORIO - $VARIABLE_ENTORNO_REPOSITORY"
+        env:
+          VARIABLE_ENTORNO_STEP: 'Hola! Soy un env de step'
