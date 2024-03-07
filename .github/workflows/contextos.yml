@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Primer paso - Valida la rama main
         if: ${{ github.ref == 'refs/heads/main'}}
-        run: echo "Desplegando el código de la rama main"
+        run: echo "Desplegando el código de la rama main del repositorio ${{ github.repository}}"
       - name: Segundo paso - Valida el trigger
         if: ${{ github.event_name == 'workflow_dispatch'}}
         run: echo "Estoy siendo lanzado por un workflow dispatch!!!"
